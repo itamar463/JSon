@@ -47,6 +47,7 @@ public class JsonBuilder implements JsonValue {
 
 
     public JsonString parseString() throws JsonSyntaxException {
+        //check for valid String return Json String
         StringBuilder s = new StringBuilder();
         charScanner.next();
         while (charScanner.hasNext()) {
@@ -70,6 +71,7 @@ public class JsonBuilder implements JsonValue {
     }
 
     public JsonNumber parseNumber() throws JsonSyntaxException, ParseException {
+        //check for valid Number return Json Number
         StringBuilder number = new StringBuilder();
         int dotCounter = 0;
         int eCounter = 0;
@@ -122,7 +124,7 @@ public class JsonBuilder implements JsonValue {
     }
 
     public JsonObject parseObject() throws JsonSyntaxException, ParseException {
-        //parse object func!!
+        //check for valid Object return Json Object
         Map<String, JsonValue> object = new HashMap<String, JsonValue>();
         while (charScanner.hasNext()) {
             if (charScanner.peek() == '}') break;
@@ -139,10 +141,14 @@ public class JsonBuilder implements JsonValue {
 
 
     public JsonArray parseArray() throws JsonSyntaxException, ParseException, IndexOutOfBoundsException {
+        //check for valid Array return Json Array
         ArrayList<JsonValue> arrayList = new ArrayList<JsonValue>();
         while (this.charScanner.hasNext() && this.charScanner.peek() != ']') {
-            this.charScanner.next();
+            if (this.charScanner.peek() != '"'){
+                this.charScanner.next();
+            }
             if (this.charScanner.peek() != ',') {
+                if (this.charScanner.peek() == ']') continue;
                 JsonValue value = this.parseValue();
                 if (value == null) throw new JsonSyntaxException("VALUE IS NOT JSON VALUE");
                 arrayList.add(value);
@@ -157,11 +163,13 @@ public class JsonBuilder implements JsonValue {
 
     @Override
     public JsonValue get(int i) throws JsonQueryException {
+        //implement any kind of JsonValue get func
         return this.value.get(i);
     }
 
     @Override
     public JsonValue get(String s) throws JsonQueryException {
+        //implement any kind of JsonValue get func
         return this.value.get(s);
 
     }

@@ -26,6 +26,7 @@ public class JsonObject implements JsonValue{
 
     @Override
     public JsonValue get(String s) throws JsonQueryException {
+        //return the value of the given key
         if (object.containsKey(s)){
             return object.get(s);
         }

@@ -2,7 +2,7 @@ package telhai.javacourse.HW03;
 
 import java.util.ArrayList;
 
-public class JsonArray implements JsonValue{
+public class JsonArray implements JsonValue {
     private ArrayList<JsonValue> array;
 
     public JsonArray(ArrayList<JsonValue> array) {
@@ -19,7 +19,8 @@ public class JsonArray implements JsonValue{
 
     @Override
     public JsonValue get(int i) throws JsonQueryException {
-        if(this.array.size()<i) throw new JsonQueryException("INDEX OUT OF BOUNDS");
+        //return the value of the given index
+        if (this.array.size() < i) throw new JsonQueryException("INDEX OUT OF BOUNDS");
         else return this.array.get(i);
     }
 
@@ -29,9 +30,17 @@ public class JsonArray implements JsonValue{
     }
 
 
-
     @Override
     public String toString() {
-        return "" + array;
+        int counter = array.size();
+        System.out.print("[");
+        for (JsonValue i : array) {
+            if (counter>1){
+                System.out.print(i + ", ");
+            }else System.out.print(i);
+            counter--;
+        }
+        System.out.print("]");
+        return "";
     }
 }

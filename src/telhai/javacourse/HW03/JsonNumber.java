@@ -17,6 +17,7 @@ public class JsonNumber implements JsonValue{
 
     @Override
     public JsonValue get(int i) throws JsonQueryException {
+        //return a JsonNumber if the given int is equal to the JsonNumber
         if (((Number) i).equals(this.k)) return (JsonValue) this.k;
         else throw new JsonQueryException("ERROR!");
     }

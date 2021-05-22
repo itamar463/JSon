@@ -21,6 +21,7 @@ public class JsonString implements JsonValue{
 
     @Override
     public JsonValue get(String str) throws JsonQueryException {
+        //return a Json Stirng if the given String is to the JsonString
         if (s.equals(str)){
             return new JsonString(str);
         }
